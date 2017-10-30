@@ -1,4 +1,13 @@
+# node
 node_modules
 npm-debug.log*
+
+# yarn
 yarn.lock
+yarn.error
+
+# build
 dist/*
+
+# OSX
+.DS_Store
