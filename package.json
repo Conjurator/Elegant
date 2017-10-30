@@ -1,0 +1,12 @@
+{
+  "name": "Elegant",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Conjurator/Elegant.git",
+  "author": "haohaiwang <haohaiwang@xiaomi.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}
