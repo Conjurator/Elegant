@@ -1,0 +1,20 @@
+language: node_js
+node_js: stable
+sudo: false
+
+git:
+  depth: 2
+
+branches:
+  only:
+    - dev
+
+before_install:
+  - npm install
+
+script:
+  - npm run unit
+
+after_script:
+  - npm run report
+  - npm run coveralls

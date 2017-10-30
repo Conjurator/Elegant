@@ -6,17 +6,22 @@
   "author": "haohaiwang <haohaiwang@xiaomi.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf dist/ && gulp"
+    "build": "rm -rf dist/ && gulp",
+    "unit": "mocha",
+    "report": "istanbul cover _mocha",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
     "gulp": "^3.9.1",
     "gulp-load-plugins": "^1.5.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^3.0.0"
+    "gulp-uglify": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.0.1"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
