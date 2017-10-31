@@ -10,7 +10,7 @@ yarn.error
 coverage/*
 
 # build
-dist/*
+build/*
 
 # OSX
 .DS_Store
