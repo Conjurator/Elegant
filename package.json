@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist/ && gulp",
-    "unit": "mocha",
+    "unit": "mocha --compilers js:babel-core/register",
     "report": "istanbul cover node_modules/mocha/bin/_mocha",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },

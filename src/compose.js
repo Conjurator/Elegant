@@ -12,7 +12,6 @@ const compose =
     (...fns) =>
         arg => {
             let list = fns.slice();
-            let result;
             while(list.length > 0) {
                 arg = list.pop()(arg);
             }
