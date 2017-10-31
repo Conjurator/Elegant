@@ -8,7 +8,7 @@
   "scripts": {
     "build": "rm -rf dist/ && gulp",
     "unit": "mocha",
-    "report": "istanbul cover _mocha",
+    "report": "istanbul cover node_modules/mocha/bin/_mocha",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "devDependencies": {
