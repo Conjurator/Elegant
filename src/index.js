@@ -1,5 +1,5 @@
-function test(a, b) {
-    return a > b
-}
+import format from './format.js'
 
-module.exports = test
+export default {
+    format
+}
