@@ -9,7 +9,7 @@
     "build": "rm -rf dist/ && gulp",
     "unit": "export NODE_ENV='TEST' && mocha --compilers js:babel-core/register",
     "unit-win": "set NODE_ENV='TEST' && mocha --compilers js:babel-core/register",
-    "report": "set NODE_ENV='TEST' && istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register",
+    "report": "export NODE_ENV='TEST' && istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "devDependencies": {
