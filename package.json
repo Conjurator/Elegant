@@ -7,9 +7,9 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist/ && gulp",
-    "unit": "export NODE_ENV='TEST' && mocha --compilers js:babel-core/register",
-    "unit-win": "set NODE_ENV='TEST' && mocha --compilers js:babel-core/register",
-    "report": "export NODE_ENV='TEST' && istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register",
+    "unit": "export NODE_ENV='TEST' && mocha --require babel-register",
+    "unit-win": "set NODE_ENV='TEST' && mocha --require babel-register",
+    "report": "export NODE_ENV='TEST' && istanbul cover node_modules/mocha/bin/_mocha -- --require babel-register",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "devDependencies": {
@@ -23,7 +23,7 @@
     "gulp-load-plugins": "^1.5.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.0",
-    "istanbul": "^0.4.5",
+    "istanbul": "1.1.0-alpha.1",
     "mocha": "^4.0.1"
   },
   "dependencies": {}
