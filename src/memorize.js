@@ -9,22 +9,15 @@
  */
 
 const memorize =
-    fn =>
-        (...args) => {
-            {
-                const key = args.join("-");
-                let cache;
-                if(!memorize.cache) {
-                    memorize.cache = {}
-                }
-                cache = memorize.cache;
-                if(cache.hasOwnProperty(key)) {
-                    return cache[key];
-                }
-                cache[key] = fn(...args);
-                Object.assign(memorize.cache, {key: cache[key]})
-                return cache[key];
-            }
+fn => {
+        var cache = {}
+        return (...args) => {
+               const key = args.join("-");
+               if(cache.hasOwnProperty(key)) {
+                   return cache[key];
+               }
+               return cache[key] = fn(...args);
         }
+    }
 
 export default memorize
