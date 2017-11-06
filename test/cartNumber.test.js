@@ -1,4 +1,3 @@
-// const test = require('../src/index')
 import { expect } from 'chai';
 import cartNumber from '../src/cartNumber';
 
