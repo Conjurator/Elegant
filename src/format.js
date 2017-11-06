@@ -1,5 +1,6 @@
+import errorHandler from './.internal/errorHandler'
+
 const getTime = (date, format, isMonth) => {
-    console.log(format + ':' + isMonth)
     switch(format) {
         case 'y':
             return date.getFullYear()
@@ -22,10 +23,14 @@ const getTime = (date, format, isMonth) => {
 } 
 
 const formatDate = (time, format = 'yyyy-mm-dd') => {
-    if(!time){
-        return '';
+    if (typeof time === 'undefined') {
+        return errorHandler('the time param must be given')
     }
     let date = new Date(time)
+    if (isNaN(date.getTime())) {
+        return errorHandler('the time you give is not a valid timestamp')
+    }
+
     let extractReg = /([a-z]{1,}(.{1}))(?=\w)/g
     let formats = []
     let separators = []
@@ -39,15 +44,17 @@ const formatDate = (time, format = 'yyyy-mm-dd') => {
     formats.push(format)
     formats.forEach((val, index) => {
         let isMonth = true
-        if (!(val.indexOf('m') < 0)) {
+        if ((val.indexOf('m') >= 0)) {
             if (formats.length - 1 === index) {
-                isMonth = !(formats[index - 1].indexOf('y') < 0)
+                if (index !== 0) {
+                    isMonth = formats[index - 1].indexOf('y') >= 0
+                }
             } else {
-                isMonth = formats[index + 1].indexOf('s') < 0
+                isMonth = formats[index + 1] && formats[index + 1].indexOf('s') < 0
             }
         }
         let currentTime = getTime(date, val.substring(0, 1), isMonth)
-        if (currentTime < 10  && val.length === 2) {
+        if (currentTime < 10 && val.length === 2) {
             currentTime = '0' + currentTime
         }
         
