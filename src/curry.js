@@ -8,13 +8,13 @@
  * @example
  *
  * fn(arg1, arg2, arg3)
- * // => fn(arg1)(arg2)(arg3)
+ * // => curry(fn)(arg1)(arg2)(arg3)
  */
 
 const curry =
-    (fn, arity = fn.length) =>
-        (nextCurried= prevArgs =>
-            nextArgs => {
+    (fn, arity = fn.length, nextCurried) =>
+        (nextCurried = prevArgs =>
+            nextArg => {
                 let args = prevArgs.concat([nextArg]);
                 if(args.length >= arity) {
                     return fn(...args);
@@ -22,6 +22,6 @@ const curry =
                     return nextCurried(args);
                 }
             }
-        )([])
+        )([]);
 
 export default curry
