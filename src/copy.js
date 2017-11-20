@@ -1,11 +1,12 @@
 import judgeType from './.internal/judgeType'
+import errorHandler from './.internal/errorHandler'
 
 let recursionCount = 0
 
 const copy = (source, deep = false) => {
     let sourceType = judgeType(source)
     if (!sourceType('array') && !sourceType('object')) {
-        throw new Error('source must be an object or an array')
+        return errorHandler('source must be an object or an array')
     }
 
     let copySource = sourceType('array') ? [] : {}
