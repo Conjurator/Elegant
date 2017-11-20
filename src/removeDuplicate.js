@@ -1,14 +1,9 @@
 import judgeType from './.internal/judgeType'
+import errorHandler from './.internal/errorHandler'
 
 const removeDuplicates = (arr = [], { deleteAll, strict } = { deleteAll: false, strict: false }) => {
     if (!judgeType(arr)('array')) {
-        let error = new Error('arr must be an array')
-        if (process.env.NODE_ENV === 'TEST') {
-            return error
-        } else {
-            throw error
-            return
-        }
+        return errorHandler('arr must be an array')
     }
     let arrLen = arr.length
     if (!arrLen) {
