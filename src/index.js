@@ -7,7 +7,7 @@ import random from './random'
 import removeDuplicate from './removeDuplicate'
 import copy from './copy'
 
-export default {
+module.exports = {
     format,
     cartNumber,
     compose,

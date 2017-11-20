@@ -7,28 +7,38 @@ import babelify from 'babelify'
 
 const plugins = gulpLoadPlugins()
 
-// js处理
-gulp.task('build', function () {
-    gulp.src('./src/index.js')
-        .pipe(babel({
-            presets: ['env']
-        }))
-        .pipe(plugins.uglify())
-        .pipe(plugins.rename('./Elegant.min.js'))
-        .pipe(gulp.dest('dist/'))
-})
-
-gulp.task('transform', function () {
-    return browserify({
+const transform = (env) => {
+    let transformSource = browserify({
         entries: './src/index.js',
         standalone: 'Elegant',
         transform: babelify,
-        debug: true
+        debug: env === 'dev' ? true : false
     })
         .bundle()
         .pipe(source('Elegant.js'))
         .pipe(buffer())
-        .pipe(gulp.dest('build/'))
+
+    let result = transformSource
+    if (env === 'dev') {
+        result = result
+                    .pipe(gulp.dest('build/'))
+    } else {
+        result = result
+                    .pipe(plugins.uglify())
+                    .pipe(plugins.rename('./Elegant.min.js'))
+                    .pipe(gulp.dest('dist/'))
+    }
+
+    return result
+}
+
+// js处理
+gulp.task('build', function () {
+    return transform('prod')
+})
+
+gulp.task('transform', function () {
+    return transform('dev')
 })
 
 // development to transform es6 code
