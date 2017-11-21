@@ -1,6 +1,12 @@
 import judgeType from './.internal/judgeType'
 import errorHandler from './.internal/errorHandler'
 
+const simpleUnique = arr => arr.filter((val, index) => arr.indexOf(val) === index)
+
+const duplicateItem = arr => arr.filter((val, index) => arr.indexOf(val) !== index)
+
+const complexUnique = arr => arr.filter(val => duplicateItem(arr).indexOf(val) < 0)
+
 const removeDuplicates = (arr = [], { deleteAll, strict } = { deleteAll: false, strict: false }) => {
     if (!judgeType(arr)('array')) {
         return errorHandler('arr must be an array')
@@ -12,14 +18,7 @@ const removeDuplicates = (arr = [], { deleteAll, strict } = { deleteAll: false, 
 
     if (deleteAll) {
         if (strict) {
-            let newArr = []
-            for (let i = arrLen; i >= 0; i--) {
-                if (arr.indexOf(arr[i]) !== i) {
-                    newArr.push(arr[i])
-                }
-            }
-
-            return newArr
+            return complexUnique(arr)
         } else {
             let obj = {}
             let newArr = []
@@ -40,7 +39,7 @@ const removeDuplicates = (arr = [], { deleteAll, strict } = { deleteAll: false, 
         }
     } else {
         if (strict) {
-            return Array.from(new Set(arr))
+            return Array.from ? Array.from(new Set(arr)) : simpleUnique(arr)
         } else {
             let obj = {}
 
