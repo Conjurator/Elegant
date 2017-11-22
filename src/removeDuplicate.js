@@ -1,13 +1,31 @@
 import judgeType from './.internal/judgeType'
 import errorHandler from './.internal/errorHandler'
 
-const simpleUnique = arr => arr.filter((val, index) => arr.indexOf(val) === index)
+const keepOneDuplicateStrict = arr =>
+    arr.filter((val, index) =>
+        arr.indexOf(val) === index)
 
-const duplicateItem = arr => arr.filter((val, index) => arr.indexOf(val) !== index)
+const keepNoneDuplicateStrict = arr =>
+    arr.filter(val =>
+        duplicateItemsStrict(arr).indexOf(val) < 0)
 
-const complexUnique = arr => arr.filter(val => duplicateItem(arr).indexOf(val) < 0)
+const keepNoneDuplicateNonStrict = arr =>
+    arr.filter(val =>
+        duplicateItemsNonStrict(arr).indexOf(val) < 0)
 
-const removeDuplicates = (arr = [], { deleteAll, strict } = { deleteAll: false, strict: false }) => {
+const duplicateItemsStrict = arr =>
+    arr.filter((val, index) =>
+        arr.indexOf(val) !== index)
+
+const duplicateItemsNonStrict = arr =>
+    arr.filter((val, idx) =>
+        arr.some((value, index) =>
+                (val !== value && val == value) || (val === value && idx !== index)))
+
+// const keepOneDuplicateNonStrict = arr =>
+//     keepOneDuplicateStrict(arr)
+
+const removeDuplicates = (arr = [], { deleteAll, strict } = { deleteAll: false, strict: true}) => {
     if (!judgeType(arr)('array')) {
         return errorHandler('arr must be an array')
     }
@@ -17,29 +35,10 @@ const removeDuplicates = (arr = [], { deleteAll, strict } = { deleteAll: false, 
     }
 
     if (deleteAll) {
-        if (strict) {
-            return complexUnique(arr)
-        } else {
-            let obj = {}
-            let newArr = []
-            for (let i = 0; i < arrLen; i++) {
-                if (obj.hasOwnProperty(arr[i])) {
-                    obj[arr[i]] = [].concat(obj[arr[i]], arr[i])
-                } else {
-                    obj[arr[i]] = arr[i]
-                }
-            }
-            for (let prop in obj) {
-                if (!judgeType(obj[prop])('array')) {
-                    newArr.push(prop)
-                }
-            }
-
-            return newArr
-        }
+        return strict ? keepNoneDuplicateStrict(arr) : keepNoneDuplicateNonStrict(arr)
     } else {
         if (strict) {
-            return Array.from ? Array.from(new Set(arr)) : simpleUnique(arr)
+            return Array.from ? Array.from(new Set(arr)) : keepOneDuplicateNonStrict(arr)
         } else {
             let obj = {}
 
