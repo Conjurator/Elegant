@@ -30,4 +30,20 @@ describe('copy function test', () => {
         expect(result).to.have.property('tags')
         expect(result.tags).to.be.an('array').not.equal(source.tags)
     })
+
+    it('should skip the circulate recursion', () => {
+        let otherObj = {
+            test: testObj
+        }
+
+        let testObj = {
+            name: 'test',
+            arr: [1, 2, 3],
+            other: otherObj
+        }
+
+        let result = copy(testObj, true)
+        expect(result).to.have.property('other')
+        expect(result.other).to.be.an('object').have.property('test', undefined)
+    })
 })
