@@ -1,20 +1,27 @@
 import judgeType from './.internal/judgeType'
-import errorHandler from './.internal/errorHandler'
 
-let recursionCount = 0
+const find = (list, fn) => list.filter(fn)[0]
 
-const copy = (source, deep = false) => {
+const copy = (source, deep = false, cache = []) => {
     let sourceType = judgeType(source)
     if (!sourceType('array') && !sourceType('object')) {
-        return errorHandler('source must be an object or an array')
+        return source
     }
 
     let copySource = sourceType('array') ? [] : {}
     for (let prop in source) {
         let sourcePropType = judgeType(source[prop])
-        if (recursionCount < 5 && deep && (sourcePropType('array') || sourcePropType('object'))) {
-            recursionCount++
-            copySource[prop] = copy(source[prop], true)
+        if (deep && (sourcePropType('array') || sourcePropType('object'))) {
+            let hit = find(cache, val => val.origin === source)
+            if (hit) {
+                copySource[prop] = hit.copy
+                return
+            }
+            cache.push({
+                origin: source[prop],
+                copy: copySource
+            })
+            copySource[prop] = copy(source[prop], true, cache)
         } else {
             copySource[prop] = source[prop]
         }

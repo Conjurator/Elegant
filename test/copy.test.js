@@ -2,10 +2,9 @@ import copy from '../src/copy'
 import { expect } from 'chai'
 
 describe('copy function test', () => {
-    it('should throw an error when source is not an array or object', () => {
+    it('should return the source when source is not an array or object', () => {
         let result = copy('')
-        expect(result).to.be.an('error')
-        expect(result).to.have.property('message', 'source must be an object or an array')
+        expect(result).to.be.a('string').equal('')
     })
 
     it('should return the shallow copy result', () => {
