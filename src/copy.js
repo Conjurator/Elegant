@@ -8,14 +8,14 @@ const copy = (source, deep = false, cache = []) => {
         return source
     }
 
+    let hit = find(cache, val => val.origin === source)
+    if (hit) {
+        return hit.copy
+    }
+
     let copySource = sourceType('array') ? [] : {}
     Object.keys(source).forEach(prop => {
         if (deep && (sourceType('array') || sourceType('object'))) {
-            let hit = find(cache, val => val.origin === source)
-            if (hit) {
-                copySource[prop] = hit.copy
-                return
-            }
             cache.push({
                 origin: source,
                 copy: copySource
