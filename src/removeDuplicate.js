@@ -1,56 +1,44 @@
 import judgeType from './.internal/judgeType'
-import errorHandler from './.internal/errorHandler'
+import arrToObject from './.internal/arrToObject'
 
-const removeDuplicates = (arr = [], { deleteAll, strict } = { deleteAll: false, strict: false }) => {
-    if (!judgeType(arr)('array')) {
-        return errorHandler('arr must be an array')
-    }
-    let arrLen = arr.length
-    if (!arrLen) {
+const duplicateItemsStrict = arr =>
+    arr.filter((val, index) =>
+        arr.indexOf(val) !== index)
+
+const duplicateItemsNonStrict = arr =>
+    arr.filter((val, idx) =>
+        arr.some((value, index) =>
+                (val !== value && val == value) || (val === value && idx !== index)))
+
+const keepOneDuplicateStrict = arr =>
+    arr.filter((val, index) =>
+        arr.indexOf(val) === index)
+
+const keepNoneDuplicateStrict = arr =>
+    arr.filter(val =>
+        duplicateItemsStrict(arr).indexOf(val) < 0)
+
+const keepNoneDuplicateNonStrict = arr =>
+    arr.filter(val =>
+        duplicateItemsNonStrict(arr).indexOf(val) < 0)
+
+const keepOneDuplicateNonStrict = arr =>
+    Object.keys(arrToObject(arr))
+
+const removeDuplicates = (arr = [], { deleteAll, strict } = { deleteAll: false, strict: true}) => {
+    if (!judgeType(arr)('array') || !arr.length) {
         return []
     }
 
+    let arrLen = arr.length
+
     if (deleteAll) {
-        if (strict) {
-            let newArr = []
-            for (let i = arrLen; i >= 0; i--) {
-                if (arr.indexOf(arr[i]) !== i) {
-                    newArr.push(arr[i])
-                }
-            }
-
-            return newArr
-        } else {
-            let obj = {}
-            let newArr = []
-            for (let i = 0; i < arrLen; i++) {
-                if (obj.hasOwnProperty(arr[i])) {
-                    obj[arr[i]] = [].concat(obj[arr[i]], arr[i])
-                } else {
-                    obj[arr[i]] = arr[i]
-                }
-            }
-            for (let prop in obj) {
-                if (!judgeType(obj[prop])('array')) {
-                    newArr.push(prop)
-                }
-            }
-
-            return newArr
-        }
+        return strict ? keepNoneDuplicateStrict(arr) : keepNoneDuplicateNonStrict(arr)
     } else {
         if (strict) {
-            return Array.from(new Set(arr))
+            return keepOneDuplicateStrict(arr)
         } else {
-            let obj = {}
-
-            for (let i = 0; i < arrLen; i++) {
-                if (!obj.hasOwnProperty(arr[i])) {
-                    obj[arr[i]] = arr[i]
-                }
-            }
-
-            return Object.keys(obj)
+            return keepOneDuplicateNonStrict(arr)
         }
     }
 }
