@@ -68,4 +68,22 @@ const formatDate = (time, format = 'yyyy-mm-dd') => {
     return formatedDate
 }
 
-export default formatDate
+const formatSize = (size) => {
+    let sizeKb = parseInt(size / 1024)
+    let formatSize = ''
+    
+    if (sizeKb === 0) {
+        formatSize = ''
+    } else if (sizeKb > 0 && sizeKb < 1024) {
+        formatSize = sizeKb + 'K'
+    } else {
+        formatSize = parseInt(sizeKb / 1024) + 'M'
+    }
+
+    return formatSize
+}
+
+export default {
+    formatDate,
+    formatSize
+}

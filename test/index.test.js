@@ -4,7 +4,8 @@ import { expect } from 'chai'
 describe('Elegant component test', () => {
     it('Elegant should contain function format', () => {
         expect(Elegant).to.have.property('format')
-        expect(Elegant.format).to.be.an.instanceof(Function)
+        expect(Elegant.format.formatDate).to.be.an.instanceof(Function)
+        expect(Elegant.format.formatSize).to.be.an.instanceof(Function)
     })
 
     it('Elegant should contain function cartNumber', () => {
