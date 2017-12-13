@@ -1,7 +1,7 @@
 {
   "name": "Elegant",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/Conjurator/Elegant.git",
   "author": "haohaiwang <haohaiwang@xiaomi.com>",
   "license": "MIT",
