@@ -5,10 +5,6 @@ sudo: false
 git:
   depth: 2
 
-branches:
-  only:
-    - dev
-
 before_install:
   - npm install
 
