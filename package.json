@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "main": "src/index.js",
   "repository": "https://github.com/Conjurator/Elegant.git",
-  "author": "haohaiwang <haohaiwang@xiaomi.com>",
+  "author": "sjffly <sujunfei@xiaomi.com>",
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist/ && gulp",
