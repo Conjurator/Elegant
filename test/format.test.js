@@ -2,16 +2,9 @@ import format from '../src/format'
 import { expect } from 'chai'
 
 describe('formatDate function test', () => {
-    it('should throw the error when time is not given', () => {
-        let result = format.formatDate()
-        expect(result).to.be.an('error')
-        expect(result).to.have.property('message', 'the time param must be given')
-    })
-
-    it('should throw the error when timestamp is invalid', () => {
+    it('should return the empty string when timestamp is invalid', () => {
         let result = format.formatDate('s')
-        expect(result).to.be.an('error')
-        expect(result).to.have.property('message', 'the time you give is not a valid timestamp')
+        expect(result).to.be.a('string').equal('')
     })
 
     it('should return the value with default format yyyy-mm-dd', () => {

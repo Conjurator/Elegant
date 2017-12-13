@@ -1,5 +1,3 @@
-import errorHandler from './.internal/errorHandler'
-
 const getTime = (date, format, isMonth) => {
     switch(format) {
         case 'y':
@@ -23,12 +21,9 @@ const getTime = (date, format, isMonth) => {
 } 
 
 const formatDate = (time, format = 'yyyy-mm-dd') => {
-    if (typeof time === 'undefined') {
-        return errorHandler('the time param must be given')
-    }
     let date = new Date(time)
     if (isNaN(date.getTime())) {
-        return errorHandler('the time you give is not a valid timestamp')
+        return ''
     }
 
     let extractReg = /([a-z]{1,}(.{1}))(?=\w)/g
