@@ -1,6 +1,6 @@
 {
   "name": "mi-elegant",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "dist/Elegant.min.js",
   "repository": "https://github.com/Conjurator/Elegant.git",
   "author": "junfeisu <1982764150@qq.com>",
