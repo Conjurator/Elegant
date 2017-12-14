@@ -1,3 +1,4 @@
+// 加密手机号码
 const encryptPhone = (phone) => {
     if (/^1\d{10}$/.test(phone)) {
         return phone.replace(/^\d{3}(\d{4})\d{4}/, (match, replacePart) => {
