@@ -14,9 +14,17 @@ const isOrientation = (posX, posY, posZ) => {
         }
     }
 
-    let result = (orientation > 45 && orientation <= 135) || (orientation > 225 && orientation <= 315)
-
-    return !result
+    if (orientation > 45 && orientation < 135) {
+        return false
+    } else if (orientation > 135 && orientation < 225) {
+        return true
+    } else if (orientation > 225 && orientation < 315) {
+        return false
+    } else if ((orientation > 315 && orientation < 360) || (orientation > 0 && orientation < 45)) {
+        return true
+    } else {
+        return 'noChange'
+    }
 }
 
 export default isOrientation

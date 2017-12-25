@@ -79,7 +79,7 @@ const formatSize = (size) => {
 }
 
 const formatTime = (millis) => {
-    let duration = Math.max(0 ,Date.now() - millis)
+    let duration = Math.max(0, Date.now() - millis)
 
     if (duration < 1000) {
         return '刚刚'

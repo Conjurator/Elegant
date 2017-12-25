@@ -12,25 +12,27 @@
  const formatHandle =
      (number, level, fixed, suffix) => {
          let temp = (number / level).toFixed(fixed);
+         while (temp[temp.length - 1] === '0' || temp[temp.length - 1] === '.') {
+            temp = temp.slice(0, -1)
+         }
          return temp + suffix;
      }
 
 const cartNumber =
     (count, toFixed = 1) => {
-        if(typeof count !== 'number') {
-            return;
+        if(typeof count !== 'number' || count <= 0) {
+            return 0;
         }
 
         let result;
-        if(count < 10000) {
+        if (count < 10000) {
             result = count;
-        }
-        if(count >= 10000 && count < 1e8) {
+        } else if (count >= 10000 && count < 1e8) {
             result = formatHandle(count, 1e4, toFixed, '万');
-        }
-        if(count >= 1e8) {
+        } else {
             result = formatHandle(count, 1e8, toFixed, '亿');
         }
+
         return result;
     }
 
