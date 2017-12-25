@@ -9,6 +9,7 @@ import copy from './copy'
 import debounce from './debounce'
 import encryptPhone from './encryptPhone'
 import isOrientation from './isOrientation'
+import isEmptyObject from './isEmptyObject'
 
 module.exports = {
     format,
@@ -21,5 +22,6 @@ module.exports = {
     copy,
     debounce,
     encryptPhone,
-    isOrientation
+    isOrientation,
+    isEmptyObject
 }
