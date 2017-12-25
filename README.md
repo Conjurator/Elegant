@@ -14,6 +14,6 @@ if not login, just enter `npm login`(need to confirm registry is not cnpm) then 
 
 after success login, run `npm version from-git` to update your local version
 
-then run `npm version patch` to add a new version tag for this package (just like git tag)
+then run `npm version patch` to add a new version tag for this package (just like git tag), then use `git push --tags` to push generated tags to github.
 
 use `git commit -am 'version info' && git push` to confirm what you edit, just run `npm publish` to publish your modification
