@@ -7,10 +7,10 @@
  * @param {boolean} excute function imediately
  * @param {object} function running context
  * @returns {function} Return the curried function, which accept one argument
- * @example
+ * @example {}
  *
- * fn(arg1, arg2, arg3)
- * // => curry(fn)(arg1)(arg2)(arg3)
+ * fn(arg1, arg2, arg3, arg4)
+ * // => fn(func,400,true,this);
  */
 const debounce = function (func, wait, immediate, funcContext) {
     var args, context, timestamp, result
@@ -34,7 +34,9 @@ const debounce = function (func, wait, immediate, funcContext) {
         args = arguments
         timestamp = new Date().getTime()
         var callNow = immediate && !funcContext.timeout
+        //如果没有设置timeout，则在context上加timeout，同时timeout记录为timeoutID
         if (!funcContext.timeout) funcContext.timeout = setTimeout(later, wait)
+        //在timeout为空，而且immediate的情况下，立即执行。
         if (callNow) {
             result = func.apply(context, args)
             context = args = null
